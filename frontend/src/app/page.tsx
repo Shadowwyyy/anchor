@@ -1,15 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { askQuestion, type AskResult } from "./lib/api";
 
 const SUGGESTIONS = ["Can I work off campus on F-1?", "What is CPT?"];
+
+type Theme = "dark" | "light";
 
 export default function Home() {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState<AskResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  useEffect(() => {
+    const saved = (localStorage.getItem("anchor-theme") as Theme) || "dark";
+    setTheme(saved);
+    document.documentElement.setAttribute("data-theme", saved);
+  }, []);
+
+  function toggleTheme() {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("anchor-theme", next);
+  }
 
   async function handleAsk(text: string) {
     const trimmed = text.trim();
@@ -32,9 +48,28 @@ export default function Home() {
   return (
     <main className="page">
       <div className="wrap">
+        <div className="topbar">
+          <button
+            className="themeToggle"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {theme === "dark" ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
+        </div>
+
         <div className="brand">
           <div className="mark" aria-hidden>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--mark-fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="5" r="2.4" />
               <line x1="12" y1="7.4" x2="12" y2="21" />
               <line x1="7" y1="11" x2="17" y2="11" />
@@ -91,6 +126,13 @@ export default function Home() {
         </div>
 
         <div className="result" aria-live="polite">
+          {loading && (
+            <div className="loadingCard">
+              <span className="spinner" />
+              Searching official guidance…
+            </div>
+          )}
+
           {error && <div className="errorCard">{error}</div>}
 
           {result && !result.is_refusal && (
@@ -104,10 +146,7 @@ export default function Home() {
                 <div className="meter">
                   <span>Match strength</span>
                   <div className="track">
-                    <div
-                      className="fill"
-                      style={{ width: `${matchStrength(result.best_distance)}%` }}
-                    />
+                    <div className="fill" style={{ width: `${matchStrength(result.best_distance)}%` }} />
                   </div>
                 </div>
               )}

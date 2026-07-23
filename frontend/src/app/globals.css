@@ -1,8 +1,25 @@
-:root {
-  --pine: #1f4d47;
-  --pine-deep: #163b36;
+:root,
+[data-theme="dark"] {
+  --paper: #1a1a1a;
+  --card: #242424;
+  --pine: #4a9d8e;
+  --pine-deep: #7ec4b5;
+  --slate: #e6edeb;
+  --slate-soft: #9da5a3;
+  --coral: #e8836b;
+  --line: #333333;
+  --grounded: #202a28;
+  --grounded-line: #33413d;
+  --refusal-bg: #2a241f;
+  --refusal-line: #4a3a30;
+  --mark-fg: #1a1a1a;
+}
+
+[data-theme="light"] {
   --paper: #f6f3ec;
   --card: #ffffff;
+  --pine: #1f4d47;
+  --pine-deep: #163b36;
   --slate: #33403d;
   --slate-soft: #6b7a76;
   --coral: #e8836b;
@@ -11,12 +28,16 @@
   --grounded-line: #bcd6cc;
   --refusal-bg: #fbf4ef;
   --refusal-line: #f0d9cc;
+  --mark-fg: #ffffff;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  height: 100%;
 }
 
 body {
@@ -24,6 +45,7 @@ body {
   background: var(--paper);
   color: var(--slate);
   line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .page {
@@ -33,7 +55,37 @@ body {
 .wrap {
   max-width: 720px;
   margin: 0 auto;
-  padding: 80px 24px 120px;
+  padding: 32px 24px 120px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.themeToggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--slate);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.themeToggle:hover {
+  border-color: var(--pine);
+  transform: translateY(-1px);
+}
+
+.themeToggle svg {
+  width: 20px;
+  height: 20px;
 }
 
 .brand {
@@ -92,7 +144,8 @@ body {
   padding: 8px;
   display: flex;
   gap: 8px;
-  box-shadow: 0 1px 3px rgba(31, 77, 71, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .ask input {
@@ -113,18 +166,22 @@ body {
 .ask button {
   border: none;
   background: var(--pine);
-  color: #fff;
+  color: var(--mark-fg);
   font-size: 15px;
   font-weight: 600;
   padding: 0 24px;
   border-radius: 14px;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .ask button:hover:not(:disabled) {
   background: var(--pine-deep);
+}
+
+.ask button:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .ask button:disabled {
@@ -149,6 +206,7 @@ body {
   text-decoration: underline;
   text-decoration-color: var(--line);
   text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
 }
 
 .suggestion:hover {
@@ -164,11 +222,23 @@ body {
   border: 1px solid var(--grounded-line);
   border-radius: 20px;
   padding: 28px;
+  animation: rise 0.35s ease both;
 }
 
 .answerCard.refusal {
   background: var(--refusal-bg);
   border-color: var(--refusal-line);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tag {
@@ -184,7 +254,7 @@ body {
 
 .tag.grounded {
   background: var(--pine);
-  color: #fff;
+  color: var(--mark-fg);
 }
 
 .tag.unsure {
@@ -216,7 +286,7 @@ body {
 .track {
   flex: 1;
   height: 6px;
-  background: #fff;
+  background: var(--paper);
   border-radius: 999px;
   overflow: hidden;
   border: 1px solid var(--grounded-line);
@@ -226,6 +296,17 @@ body {
   height: 100%;
   background: var(--pine);
   border-radius: 999px;
+  animation: fillGrow 0.6s ease both;
+  transform-origin: left;
+}
+
+@keyframes fillGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .sources {
@@ -250,7 +331,7 @@ body {
   font-size: 13px;
   font-weight: 500;
   padding: 6px 12px;
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--grounded-line);
   border-radius: 10px;
   color: var(--pine);
@@ -263,6 +344,31 @@ body {
   padding: 20px 24px;
   font-size: 15px;
   color: var(--slate);
+  animation: rise 0.35s ease both;
+}
+
+.loadingCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--slate-soft);
+  font-size: 15px;
+  padding: 8px 4px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line);
+  border-top-color: var(--pine);
+  border-radius: 999px;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .disclaimer {
@@ -271,4 +377,11 @@ body {
   color: var(--slate-soft);
   text-align: center;
   line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
