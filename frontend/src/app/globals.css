@@ -1,0 +1,274 @@
+:root {
+  --pine: #1f4d47;
+  --pine-deep: #163b36;
+  --paper: #f6f3ec;
+  --card: #ffffff;
+  --slate: #33403d;
+  --slate-soft: #6b7a76;
+  --coral: #e8836b;
+  --line: #e2ddd2;
+  --grounded: #e8f0ec;
+  --grounded-line: #bcd6cc;
+  --refusal-bg: #fbf4ef;
+  --refusal-line: #f0d9cc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--pine);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brandName {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--pine);
+}
+
+.hero {
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--pine-deep);
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 17px;
+  color: var(--slate-soft);
+  max-width: 520px;
+}
+
+.ask {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(31, 77, 71, 0.04);
+}
+
+.ask input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  padding: 14px 16px;
+  color: var(--slate);
+  font-family: inherit;
+}
+
+.ask input::placeholder {
+  color: var(--slate-soft);
+}
+
+.ask button {
+  border: none;
+  background: var(--pine);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 24px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease;
+}
+
+.ask button:hover:not(:disabled) {
+  background: var(--pine-deep);
+}
+
+.ask button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--slate-soft);
+}
+
+.suggestion {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--slate);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+
+.suggestion:hover {
+  text-decoration-color: var(--slate-soft);
+}
+
+.result {
+  margin-top: 32px;
+}
+
+.answerCard {
+  background: var(--grounded);
+  border: 1px solid var(--grounded-line);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.answerCard.refusal {
+  background: var(--refusal-bg);
+  border-color: var(--refusal-line);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.tag.grounded {
+  background: var(--pine);
+  color: #fff;
+}
+
+.tag.unsure {
+  background: var(--coral);
+  color: #fff;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.answerText {
+  font-size: 17px;
+  color: var(--slate);
+}
+
+.meter {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--slate-soft);
+}
+
+.track {
+  flex: 1;
+  height: 6px;
+  background: #fff;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--grounded-line);
+}
+
+.fill {
+  height: 100%;
+  background: var(--pine);
+  border-radius: 999px;
+}
+
+.sources {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--grounded-line);
+}
+
+.sourcesLabel {
+  font-size: 13px;
+  color: var(--slate-soft);
+  margin-bottom: 8px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  background: #fff;
+  border: 1px solid var(--grounded-line);
+  border-radius: 10px;
+  color: var(--pine);
+}
+
+.errorCard {
+  background: var(--refusal-bg);
+  border: 1px solid var(--refusal-line);
+  border-radius: 20px;
+  padding: 20px 24px;
+  font-size: 15px;
+  color: var(--slate);
+}
+
+.disclaimer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--slate-soft);
+  text-align: center;
+  line-height: 1.6;
+}
