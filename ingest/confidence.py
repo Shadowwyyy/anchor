@@ -2,8 +2,8 @@
 
 The refuse-to-guess gate. Cosine distance runs 0 (identical) to 2 (opposite);
 with nomic-embed-text, strong topical matches land near 0.2 and unrelated
-chunks score much higher. If the nearest chunk is beyond the threshold, the
-system should decline rather than answer from weak context.
+chunks score higher. If the nearest chunk is beyond the threshold, the system
+should decline rather than answer from weak context.
 """
 
 from __future__ import annotations
@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 from .retriever import RetrievedChunk
 
-DEFAULT_MAX_DISTANCE = 0.6
+DEFAULT_MAX_DISTANCE = 0.5
 
 
 @dataclass(frozen=True)

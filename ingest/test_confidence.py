@@ -58,7 +58,7 @@ def test_non_positive_threshold_raises(bad):
 
 
 def test_default_threshold_value():
-    assert DEFAULT_MAX_DISTANCE == 0.6
+    assert DEFAULT_MAX_DISTANCE == 0.5
 
 
 def test_confidence_is_frozen():

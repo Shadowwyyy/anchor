@@ -1,0 +1,50 @@
+{
+  "f1-employment.pdf": {
+    "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/students-and-employment",
+    "title": "Students and Employment",
+    "source": "USCIS",
+    "fetched": "2026-07-23"
+  },
+  "opt.pdf": {
+    "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-opt-for-f-1-students",
+    "title": "Optional Practical Training (OPT) for F-1 Students",
+    "source": "USCIS",
+    "fetched": "2026-07-23"
+  },
+  "stem-opt.pdf": {
+    "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-extension-for-stem-students-stem-opt",
+    "title": "Optional Practical Training Extension for STEM Students (STEM OPT)",
+    "source": "USCIS",
+    "fetched": "2026-07-24"
+  },
+  "studyinthestates-opt.pdf": {
+    "url": "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-optional-practical-training-opt",
+    "title": "F-1 Optional Practical Training (OPT)",
+    "source": "DHS Study in the States",
+    "fetched": "2026-07-23"
+  },
+  "cpt.pdf": {
+    "url": "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-curricular-practical-training-cpt",
+    "title": "F-1 Curricular Practical Training (CPT)",
+    "source": "DHS Study in the States",
+    "fetched": "2026-07-24"
+  },
+  "maintaining-status.pdf": {
+    "url": "https://studyinthestates.dhs.gov/students/maintaining-status",
+    "title": "Maintaining Status",
+    "source": "DHS Study in the States",
+    "fetched": "2026-07-24"
+  },
+  "travel.pdf": {
+    "url": "https://www.ice.gov/sevis/travel",
+    "title": "Travel",
+    "source": "ICE SEVP",
+    "fetched": "2026-07-24"
+  },
+  "grace-period.pdf": {
+    "url": "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/completions-and-terminations/complete-program",
+    "title": "Complete Program (Grace Period)",
+    "source": "DHS Study in the States",
+    "fetched": "2026-07-24"
+  }
+}
