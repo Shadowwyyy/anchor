@@ -596,3 +596,27 @@ body {
   background: var(--pine);
   border-color: var(--pine);
 }
+
+.chatHeader {
+  justify-content: space-between;
+}
+
+.headerThemeToggle {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--slate-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.headerThemeToggle:hover {
+  color: var(--slate);
+  border-color: var(--pine);
+}
