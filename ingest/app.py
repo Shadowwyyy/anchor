@@ -45,6 +45,7 @@ app.add_middleware(
 
 class AskRequest(BaseModel):
     question: str
+    detailed: bool = False
 
 
 class AskResponse(BaseModel):
@@ -68,6 +69,7 @@ def ask(request: AskRequest) -> AskResponse:
             clients["embedder"],
             clients["collection"],
             clients["claude"],
+            detailed=request.detailed,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc

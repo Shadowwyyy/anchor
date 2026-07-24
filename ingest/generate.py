@@ -13,19 +13,21 @@ MAX_TOKENS = 1024
 
 QUICK_PROMPT = (
     "You answer questions about US immigration status using only the provided "
-    "context. Answer in 1-2 short sentences. Answer strictly from the context; "
-    "never add legal specifics that are not present; do not use markdown or "
-    "inline source tags; if the context does not cover the question, say so "
-    "plainly. Informational only, not legal advice."
+    "context. Give the shortest accurate answer possible — ideally one sentence, "
+    "never more than two. State only the core fact; omit elaboration, examples, "
+    "and lists. Answer strictly from the context; never add legal specifics not "
+    "present; do not use markdown or inline source tags; if the context does not "
+    "cover the question, say so plainly. Informational only, not legal advice."
 )
 
 DETAILED_PROMPT = (
     "You answer questions about US immigration status using only the provided "
-    "context. Give a thorough answer: explain the rule, then note any relevant "
-    "steps, conditions, or caveats present in the context. Answer strictly from "
-    "the context; never add legal specifics that are not present; do not use "
-    "markdown or inline source tags; if the context does not cover the question, "
-    "say so plainly. Informational only, not legal advice."
+    "context. Give a comprehensive answer: state the main rule, then walk through "
+    "every relevant condition, exception, time limit, and procedural step found "
+    "in the context. Be thorough and organize the answer clearly. Answer strictly "
+    "from the context; never add legal specifics not present; do not use markdown "
+    "or inline source tags; if the context does not cover the question, say so "
+    "plainly. Informational only, not legal advice."
 )
 
 REFUSAL_MESSAGE = (
