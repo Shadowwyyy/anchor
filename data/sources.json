@@ -46,5 +46,11 @@
     "title": "Complete Program (Grace Period)",
     "source": "DHS Study in the States",
     "fetched": "2026-07-24"
+  },
+  "on-campus-work.pdf": {
+    "url": "https://studyinthestates.dhs.gov/students/work/working-in-the-united-states",
+    "title": "Working in the United States (On-Campus Employment)",
+    "source": "DHS Study in the States",
+    "fetched": "2026-07-24"
   }
 }

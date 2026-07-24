@@ -27,11 +27,16 @@ class DocumentReadError(Exception):
 
 
 def _clean(text: str) -> str:
+    # Normalize odd whitespace from PDF extraction (narrow/no-break spaces).
+    text = text.replace("\u202f", " ").replace("\xa0", " ")
+    # Strip print-dialog artifacts: date/time headers and page markers.
+    text = re.sub(r"\d{1,2}/\d{1,2}/\d{2,4},\s*\d{1,2}:\d{2}\s*[AP]M", " ", text)
+    text = re.sub(r"Page \d+ of \d+", " ", text)
+    # Rejoin words split across a line break by hyphenation.
     text = re.sub(r"(\w)-\n(\w)", r"\1\2", text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
-
 
 def _read_pdf(path: Path, extract_pages: Callable[[Path], list[str]]) -> str:
     try:
