@@ -24,7 +24,7 @@ def answer_question(
     embedder: Embedder,
     collection: QueryableCollection,
     claude: ClaudeClient,
-    top_k: int = 5,
+    top_k: int = 8,
     detailed: bool = False,
 ) -> AskResult:
     """Run retrieve -> assess -> generate and return a flat result.

@@ -8,7 +8,7 @@ from typing import Protocol
 from .confidence import Confidence
 from .retriever import RetrievedChunk
 
-DEFAULT_MODEL = "claude-sonnet-4-5"
+DEFAULT_MODEL = "claude-haiku-4-5"
 MAX_TOKENS = 1024
 
 QUICK_PROMPT = (
