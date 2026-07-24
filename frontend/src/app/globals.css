@@ -514,7 +514,7 @@ body {
   color: var(--slate-soft);
 }
 
-.composerInner button {
+.composerInner button[type="submit"] {
   width: 42px;
   border: none;
   background: var(--pine);
@@ -527,11 +527,11 @@ body {
   transition: background 0.15s ease;
 }
 
-.composerInner button:hover:not(:disabled) {
+.composerInner button[type="submit"]:hover:not(:disabled) {
   background: var(--pine-deep);
 }
 
-.composerInner button:disabled {
+.composerInner button[type="submit"]:disabled {
   opacity: 0.4;
   cursor: default;
 }
@@ -575,14 +575,18 @@ body {
 
 .modeToggle {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
   padding: 0 14px;
   border: 1px solid var(--line);
   background: transparent;
   color: var(--slate-soft);
-  border-radius: 12px;
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
+  white-space: nowrap;
   cursor: pointer;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }

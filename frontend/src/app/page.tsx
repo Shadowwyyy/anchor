@@ -237,10 +237,6 @@ export default function Home() {
                 <div className="bubble assistant errorBubble">{m.error}</div>
               ) : m.result && !m.result.is_refusal ? (
                 <div className="bubble assistant">
-                  <span className="tag grounded">
-                    <span className="dot" />
-                    Grounded in sources
-                  </span>
                   <p className="answerText">{m.result.answer}</p>
                   <AnswerDetails result={m.result} />
                 </div>
@@ -317,6 +313,10 @@ function AnswerDetails({ result }: { result: AskResult }) {
       </button>
       {open && (
         <div className="detailsBody">
+          <span className="tag grounded">
+            <span className="dot" />
+            Grounded in sources
+          </span>
           {result.best_distance !== null && (
             <div className="meter">
               <span>Match strength</span>
