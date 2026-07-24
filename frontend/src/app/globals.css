@@ -620,3 +620,49 @@ body {
   color: var(--slate);
   border-color: var(--pine);
 }
+
+.answerText > * {
+  margin: 0;
+}
+
+.answerText > * + * {
+  margin-top: 12px;
+}
+
+.answerText h1 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--pine-deep);
+}
+
+.answerText h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--slate);
+  margin-top: 18px;
+}
+
+.answerText h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--slate);
+  margin-top: 14px;
+}
+
+.answerText ul,
+.answerText ol {
+  padding-left: 20px;
+}
+
+.answerText li {
+  margin-top: 4px;
+}
+
+.answerText strong {
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.answerText p {
+  font-size: 15px;
+}

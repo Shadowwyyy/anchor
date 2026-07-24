@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { askQuestion, type AskResult } from "./lib/api";
 
 type Theme = "dark" | "light";
@@ -176,11 +177,10 @@ export default function Home() {
             </div>
           ))}
         </div>
-
       </aside>
 
       <main className="chat">
-<div className="chatHeader">
+        <div className="chatHeader">
           <button className="sidebarToggle" onClick={() => setSidebarOpen((v) => !v)} aria-label="Toggle sidebar">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="3" y1="12" x2="21" y2="12" />
@@ -234,7 +234,9 @@ export default function Home() {
                 <div className="bubble assistant errorBubble">{m.error}</div>
               ) : m.result && !m.result.is_refusal ? (
                 <div className="bubble assistant">
-                  <p className="answerText">{m.result.answer}</p>
+                  <div className="answerText">
+                    <ReactMarkdown>{m.result.answer}</ReactMarkdown>
+                  </div>
                   <AnswerDetails result={m.result} />
                 </div>
               ) : m.result ? (
@@ -243,7 +245,9 @@ export default function Home() {
                     <span className="dot" />
                     Not sure enough to answer
                   </span>
-                  <p className="answerText">{m.result.answer}</p>
+                  <div className="answerText">
+                    <ReactMarkdown>{m.result.answer}</ReactMarkdown>
+                  </div>
                 </div>
               ) : null}
             </div>
