@@ -28,6 +28,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState<Theme>("dark");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [detailed, setDetailed] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -93,7 +94,6 @@ export default function Home() {
     let convId = activeId;
 
     if (convId === null) {
-      // start a new conversation
       convId = Date.now();
       const conv: Conversation = {
         id: convId,
@@ -109,7 +109,7 @@ export default function Home() {
     }
 
     try {
-      const result = await askQuestion(trimmed);
+      const result = await askQuestion(trimmed, detailed);
       const answerMsg: Message = { id: Date.now() + 1, role: "assistant", result };
       setConversations((prev) =>
         prev.map((c) => (c.id === convId ? { ...c, messages: [...c.messages, answerMsg] } : c))
@@ -242,24 +242,7 @@ export default function Home() {
                     Grounded in sources
                   </span>
                   <p className="answerText">{m.result.answer}</p>
-                  {m.result.best_distance !== null && (
-                    <div className="meter">
-                      <span>Match strength</span>
-                      <div className="track">
-                        <div className="fill" style={{ width: `${matchStrength(m.result.best_distance)}%` }} />
-                      </div>
-                    </div>
-                  )}
-                  {m.result.sources.length > 0 && (
-                    <div className="sources">
-                      <div className="sourcesLabel">{m.result.sources.length === 1 ? "Source" : "Sources"}</div>
-                      <div className="chips">
-                        {m.result.sources.map((s) => (
-                          <span key={s} className="chip">{s}</span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <AnswerDetails result={m.result} />
                 </div>
               ) : m.result ? (
                 <div className="bubble assistant refusal">
@@ -293,6 +276,15 @@ export default function Home() {
               send(input);
             }}
           >
+            <button
+              type="button"
+              className={`modeToggle ${detailed ? "on" : ""}`}
+              onClick={() => setDetailed((v) => !v)}
+              aria-label="Toggle answer length"
+              title={detailed ? "Detailed answers" : "Quick answers"}
+            >
+              {detailed ? "Detailed" : "Quick"}
+            </button>
             <input
               type="text"
               value={input}
@@ -312,6 +304,39 @@ export default function Home() {
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function AnswerDetails({ result }: { result: AskResult }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="details">
+      <button className="detailsToggle" onClick={() => setOpen((v) => !v)}>
+        {open ? "Hide details" : "Details"}
+      </button>
+      {open && (
+        <div className="detailsBody">
+          {result.best_distance !== null && (
+            <div className="meter">
+              <span>Match strength</span>
+              <div className="track">
+                <div className="fill" style={{ width: `${matchStrength(result.best_distance)}%` }} />
+              </div>
+            </div>
+          )}
+          {result.sources.length > 0 && (
+            <div className="sources">
+              <div className="sourcesLabel">{result.sources.length === 1 ? "Source" : "Sources"}</div>
+              <div className="chips">
+                {result.sources.map((s) => (
+                  <span key={s} className="chip">{s}</span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

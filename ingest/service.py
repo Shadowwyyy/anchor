@@ -25,6 +25,7 @@ def answer_question(
     collection: QueryableCollection,
     claude: ClaudeClient,
     top_k: int = 5,
+    detailed: bool = False,
 ) -> AskResult:
     """Run retrieve -> assess -> generate and return a flat result.
 
@@ -35,7 +36,7 @@ def answer_question(
 
     chunks = retrieve(question, embedder, collection, top_k=top_k)
     confidence = assess_confidence(chunks)
-    answer = generate_answer(question, chunks, confidence, claude)
+    answer = generate_answer(question, chunks, confidence, claude, detailed=detailed)
 
     return AskResult(
         answer=answer.text,

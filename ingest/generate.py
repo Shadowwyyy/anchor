@@ -11,12 +11,21 @@ from .retriever import RetrievedChunk
 DEFAULT_MODEL = "claude-sonnet-4-5"
 MAX_TOKENS = 1024
 
-SYSTEM_PROMPT = (
+QUICK_PROMPT = (
     "You answer questions about US immigration status using only the provided "
-    "context. Rules: answer in 2-4 plain sentences; answer strictly from the "
-    "context; never add legal specifics that are not present; do not use "
-    "markdown formatting or inline source tags; if the context does not cover "
-    "the question, say so plainly. This is informational only, not legal advice."
+    "context. Answer in 1-2 short sentences. Answer strictly from the context; "
+    "never add legal specifics that are not present; do not use markdown or "
+    "inline source tags; if the context does not cover the question, say so "
+    "plainly. Informational only, not legal advice."
+)
+
+DETAILED_PROMPT = (
+    "You answer questions about US immigration status using only the provided "
+    "context. Give a thorough answer: explain the rule, then note any relevant "
+    "steps, conditions, or caveats present in the context. Answer strictly from "
+    "the context; never add legal specifics that are not present; do not use "
+    "markdown or inline source tags; if the context does not cover the question, "
+    "say so plainly. Informational only, not legal advice."
 )
 
 REFUSAL_MESSAGE = (
@@ -57,18 +66,20 @@ def generate_answer(
     confidence: Confidence,
     client: ClaudeClient,
     model: str = DEFAULT_MODEL,
+    detailed: bool = False,
 ) -> Answer:
     """Answer the question from chunks, or refuse when confidence is low.
 
     When confidence.is_confident is False, returns a refusal without calling
     the client. Otherwise sends the grounded prompt to Claude and returns its
-    answer with the list of source filenames used.
+    answer with the source filenames used. `detailed` selects a fuller prompt.
     """
     if not confidence.is_confident:
         return Answer(REFUSAL_MESSAGE, is_refusal=True, sources=[])
 
+    system = DETAILED_PROMPT if detailed else QUICK_PROMPT
     context = _format_context(chunks)
     prompt = f"Context:\n{context}\n\nQuestion: {question}"
-    reply = client.create_message(model=model, system=SYSTEM_PROMPT, prompt=prompt)
+    reply = client.create_message(model=model, system=system, prompt=prompt)
 
     return Answer(reply, is_refusal=False, sources=_unique_sources(chunks))

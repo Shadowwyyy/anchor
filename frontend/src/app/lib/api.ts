@@ -8,11 +8,11 @@ export type AskResult = {
   best_distance: number | null;
 };
 
-export async function askQuestion(question: string): Promise<AskResult> {
+export async function askQuestion(question: string, detailed = false): Promise<AskResult> {
   const response = await fetch(`${API_BASE}/ask`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ question }),
+    body: JSON.stringify({ question, detailed }),
   });
 
   if (!response.ok) {

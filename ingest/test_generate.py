@@ -3,8 +3,9 @@
 from .confidence import Confidence
 from .generate import (
     DEFAULT_MODEL,
+    DETAILED_PROMPT,
+    QUICK_PROMPT,
     REFUSAL_MESSAGE,
-    SYSTEM_PROMPT,
     generate_answer,
 )
 from .retriever import RetrievedChunk
@@ -68,10 +69,16 @@ def test_prompt_includes_context_and_question():
     assert "a.txt" in prompt
 
 
-def test_uses_system_prompt():
+def test_uses_quick_prompt_by_default():
     client = FakeClient()
     generate_answer("q", [chunk()], CONFIDENT, client)
-    assert client.calls[0]["system"] == SYSTEM_PROMPT
+    assert client.calls[0]["system"] == QUICK_PROMPT
+
+
+def test_detailed_uses_detailed_prompt():
+    client = FakeClient()
+    generate_answer("q", [chunk()], CONFIDENT, client, detailed=True)
+    assert client.calls[0]["system"] == DETAILED_PROMPT
 
 
 def test_default_model_used():

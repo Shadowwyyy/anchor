@@ -547,3 +547,48 @@ body {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+.details {
+  margin-top: 12px;
+}
+
+.detailsToggle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--slate-soft);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s ease;
+}
+
+.detailsToggle:hover {
+  color: var(--slate);
+}
+
+.detailsBody {
+  margin-top: 12px;
+  animation: rise 0.2s ease both;
+}
+
+.modeToggle {
+  flex-shrink: 0;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--slate-soft);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.modeToggle.on {
+  color: var(--mark-fg);
+  background: var(--pine);
+  border-color: var(--pine);
+}
